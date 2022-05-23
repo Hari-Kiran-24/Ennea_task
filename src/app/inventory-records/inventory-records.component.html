@@ -1,0 +1,24 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div class="col-md-12 mb-4 mt-3">
+    <div class="row">
+      <div class="col-md-4">
+        <label for="name">Product Names</label>
+        <select name="name" class="form-control" id="name" [(ngModel)]="selectedName" (change)="onNameChange()">
+          <option [value]="item" *ngFor="let item of nameArr">{{ item }}</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="batch">Batches</label>
+        <select name="batch" class="form-control" [(ngModel)]="selectedBatch" (change)="onBatchChange()" id="batch">
+          <option value="" selected>ALL</option>
+          <option [value]="item" *ngFor="let item of batchesArr">{{ item }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <ngx-datatable tableClass="table table-striped table-bordered table-hover" [tableId]="'basic'" [data]="data"
+      [options]="options" [columns]="columns">
+    </ngx-datatable>
+  </div>

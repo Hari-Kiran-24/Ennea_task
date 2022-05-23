@@ -1,0 +1,59 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div class="col-md-12">
+    <div class="row">
+          <div class="col-md-6 mt-4 for-border">
+            <h3 class="mt-2 mb-4">Expired vs Not-expired Products</h3>
+              <div class="row mb-2">
+                <div class="col-md-6 ">
+                    <label for="name">Comapny Name</label>
+                    <select name="name" class="form-control" id="name" [(ngModel)]="selectedName" (change)="onNameChange()">
+                      <option [value]="item" *ngFor="let item of nameArr">{{ item }}</option>
+                    </select>
+                  </div>
+              </div>
+            <ngx-charts-pie-chart
+            [view]="view"
+            [scheme]="colorSchemeForPie"
+            [results]="pieChartData"
+            [legend]="showLegend"
+            [labels]="true"
+            [doughnut]="false"
+            [gradient]="gradient"
+          ></ngx-charts-pie-chart>
+          </div>
+          <div class="col-md-6 mt-4">
+            <h3 class="mt-2 mb-4">Expired Product's Count</h3>
+              <div class="row mb-2">
+                  <div class="col-md-6 ">
+                      <label for="name">Comapny Name</label>
+                      <select name="name" class="form-control" id="name" [(ngModel)]="selectedNameForBarChart" (change)="onNameChangeForBarChart()">
+                        <option [value]="item" *ngFor="let item of nameArr">{{ item }}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 ">
+                        <label for="date">Date</label>
+                        <input type="date" name="date" [value]="selectedDate | date:'yyyy-MM-dd'"  id="date" class="form-control" (change)="onDateChange($event)">
+                      </div>
+                      <div class="col-md-12 mt-5">
+                        <div class="for-chart">
+                          <ngx-charts-bar-vertical
+                          [view]="view"
+                          [scheme]="colorSchemeForBar"
+                          [results]="barChartData"
+                          [gradient]="gradient"
+                          [xAxis]="showXAxis"
+                          [yAxis]="showYAxis"
+                          [legend]="showLegend"
+                          [showXAxisLabel]="showXAxisLabel"
+                          [showYAxisLabel]="showYAxisLabel"
+                          [xAxisLabel]="xAxisLabel"
+                          [yAxisLabel]="yAxisLabel"
+                          (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+                        </div>
+                      </div>
+              </div>
+          </div>
+    </div>
+</div>
